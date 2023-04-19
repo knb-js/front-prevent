@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>No + Accidentes | Verifed</title>
+  <link rel="icon" href="https://i.ibb.co/SBDtKpV/logo-No-Mas.png" type="image/x-icon">
+    <!-- icheck bootstrap -->
+  <link th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}" rel="stylesheet">
+  <!-- Theme style -->
+  <link th:href="@{/plugins/adminlte.min.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+  <link th:href="@{/plugins/fontawesome-free/css/all.min.css}" >
+  
+    <link th:href="@{/plugins/style.css}" rel="stylesheet">
+</head>
+<body class="hold-transition login-page">
+    <img style="width: 250px; line-height: 100%; outline: none; text-decoration: none; display: block; margin-left: auto; margin-right: auto" class="ax-center mt-10 img-fluid" src="https://i.ibb.co/SBDtKpV/logo-No-Mas.png" />
+	<h1 th:text="${response}">Tu cuenta ha sido verificada</h1>
+	<h5>Serás rediregido al login en 5 segundos..</h5>
+	<a class="btn btn-danger" th:href="@{/login}">Volver</a>
+	<!-- /.login-box -->
+	
+	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+	
+	<script th:inline="javascript">
+		$(document).ready(() => {
+			setTimeout(() => window.location.replace('/login'), 5000);
+		});
+	</script>
+</body>
+</html>

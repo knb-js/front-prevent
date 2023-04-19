@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> No + Accidentes | Service</title>
+	<link rel="icon" href="https://i.ibb.co/SBDtKpV/logo-No-Mas.png" type="image/x-icon">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Roboto:wght@500&display=swap"
+		rel="stylesheet">
+	<link th:href="@{/plugins/StylePrincipal.css}" rel="stylesheet">
+	<link th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-dark">
+	<div th:include="include/navbar"></div>
+
+	<main class="seccion contenedor">
+		<h2 class="fw-300 centrar-texto">Servicios</h2>
+		<div class="contenedor-anuncios" id="items">	    
+		      	<div class="row align-items-center">
+						<div class="col-4 mb-4" th:each="servicio : ${listAllService}">
+							<img th:src="${servicio.image}" height="300px"alt="">
+							<div class="contenido.anuncio">
+								<h3 class="titulo-s" th:text="${servicio.nombreServicio}"></h3>
+								<p class="texto-p" th:text="${servicio.descripcion}"></p>
+								<p class="precio" th:text=${servicio.precio}></p>
+								<a id="botonServicio" th:href="@{'/service/' + ${servicio.idServicio}}" class="boton boton-amarillo d-block">Ver Servicio</a>
+							</div>
+						</div>
+				</div>			
+		</div>
+	</main>
+
+	<footer class="site-footer seccion bg-success" height="">
+		<div class="contenedor contenedor-footer">
+			<nav id="navegacion" class="navegacion">
+				<a th:href="@{/about-us}">Nosotros</a>
+				<a th:href="@{/service}">Servicios</a>
+				<a th:href="@{/contact}">Contacto</a>
+			</nav>
+			<p class="copyright">No + Accidentes 2022&copy;</p>
+		</div>
+	</footer>
+
+	<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+	<!-- Bootstrap 4 -->
+	<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<!-- AdminLTE App -->
+	<script th:src="@{/plugins/adminlte.min.js}"></script>
+
+	<script th:inline="javascript">
+	 	let listCart = JSON.parse(localStorage.getItem('listCart')) || [];
+	 	$(document).ready(() => {
+		 	$('#iconCarrito').text(listCart.length);
+		 })
+	</script>
+
+</body>
+
+</html>

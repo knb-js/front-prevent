@@ -1,0 +1,38 @@
+body{
+    background: url("https://i.ibb.co/xhTRxNx/9074c87d-6b33-47ec-a21f-aad37d169c61.jpg") no-repeat center top;
+    background-size: cover;
+}
+
+
+.login-box .avatar{
+    display: block;
+    margin: 0px auto 10px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; 
+}
+
+.register-box{
+    
+    font-family: inherit;
+    color: inherit;
+    background-color: #fff;
+}
+
+.register-logo .avatar{
+    display: block;
+    margin: 0px auto 10px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; 
+}
+
+.card-success {
+	border-top: #026C1A 4px solid !important;
+}
+
+a:hover {
+	color: #129E32 !important;
+	text-decoration: none;
+    background-color: transparent
+}

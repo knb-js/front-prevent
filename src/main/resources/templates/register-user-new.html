@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>No + Accidentes | Register</title>
+	<link rel="icon" href="https://i.ibb.co/SBDtKpV/logo-No-Mas.png" type="image/x-icon">
+	<!-- Google Font: Source Sans Pro -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+	<!-- Font Awesome -->
+	<link th:href="@{/plugins/fontawesome-free/css/all.min.css}" rel="stylesheet">
+	<!-- icheck bootstrap -->
+	<link th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}" rel="stylesheet">
+	<!-- Theme style -->
+	<link th:href="@{/plugins/adminlte.min.css}" rel="stylesheet">
+	<!--   <!-- Theme custom style -->
+	<link th:href="@{/plugins/style.css}" rel="stylesheet">
+	<style type="text/css">
+		.alertFailedAuth {
+			display: none;
+		}
+	</style>
+</head>
+
+<body class="hold-transition login-page body">
+	<div class="login-box">
+		<div class="col-12">
+			<div class="alert alert-danger alert-dismissible mt-2 animation__shake alertFailedAuth"
+				id="alertFailedAuth">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<h5><i class="icon fas fa-ban"></i> No se ha logrado logear con éxito <i class="icon fas fa-user"></i>
+				</h5>
+				Ha ocurrido un error con la autenticación, incorrecto usuario o contraseña.
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="alert alert-danger alert-dismissible mt-2 animation__shake alertFailedAuth" id="alertVerifed">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<h5><i class="icon fas fa-ban"></i> No se ha logrado logear con éxito <i class="icon fas fa-user"></i>
+				</h5>
+				Debes verificar tu correo electronico, se acaba de enviar un email para que lo puedas realizar.
+			</div>
+		</div>
+		<div class="mb-2">
+			<img style="width: 80%; height: 80%; line-height: 100%; outline: none; text-decoration: none; display: block; margin-left: auto; margin-right: auto"
+				src="https://i.ibb.co/SBDtKpV/logo-No-Mas.png">
+		</div>
+		<div class="card card-outline card-success">
+			<div class="card-header text-center">
+				<a href="../../index2.html" class="h1"><b>No + </b><br /> Accidentes</a>
+			</div>
+			<div class="card-body">
+				<p class="login-box-msg">Regístrate</p>
+				<form id="userAddForm">
+
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" placeholder="Rut" name="rut" id="rut">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-user"></span>
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" placeholder="Nombres" name="name"
+							id="name">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-user"></span>
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" placeholder="Apellidos" name="lastName"
+							id="lastName">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-user"></span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="input-group mb-3">
+						<input type="number" class="form-control" placeholder="Numero Celular" name="contactPhone"
+							id="contactPhone">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-mobile"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" placeholder="Dirección" name="address"
+							id="address">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fa fa-map-marker"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="input-group mb-3">
+						<input type="date" class="form-control" placeholder="Cumpleaños" name="birthday"
+							id="birthday">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fa fa-birthday-cake"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="inputGroupSelect01">Nacionalidad</label>
+						</div>
+						<select class="custom-select" id="idNacionalidad" name="idNacionalidad">
+							<option selected value="0">Seleccionar</option>
+							<option th:each="nacionalidad : ${findAllNacionalidad}" th:value="${nacionalidad.idNacionalidad}" th:text="${nacionalidad.descripcion}"></option>
+							<!--<option value="2">Argentina</option>
+							<option value="3">Brasil</option>-->
+						</select>
+					</div>
+					
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="inputGroupSelect01">Genero</label>
+						</div>
+						<select class="custom-select" id="idGenero" name="idGenero">
+							<option value="0" selected>Seleccionar</option>
+							<option th:each="genero : ${findAllGenero}" th:value="${genero.idGenero}" th:text="${genero.descripcion}"></option>
+			
+						</select>
+					</div>
+					
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="inputGroupSelect01">Comuna</label>
+						</div>
+						<select class="custom-select" id="idComuna" name="idComuna">
+							<option selected value="0">Seleccionar</option>
+							<option th:each="comuna : ${findAllComuna}" th:value="${comuna.idComuna}" th:text="${comuna.descripcion}"></option>
+						</select>
+					</div>
+					
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="inputGroupSelect01">Estado Civil</label>
+						</div>
+						<select class="custom-select" id="idEstadoCivil" name="idEstadoCivil">
+							<option selected value="0">Seleccionar</option>
+							<option th:each="estadoCivil : ${findAllEstadoCivil}" th:value="${estadoCivil.idEstadoCivil}" th:text="${estadoCivil.descripcion}"></option>
+						</select>
+					</div>
+					
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" placeholder="Ingrese Email" name="email"
+							id="email" autocomplete="off">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-envelope"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" placeholder="Ingrese Email Corporativo"
+							name="corporateEmail" id="corporateEmail" autocomplete="off">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-envelope"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="input-group mb-3">
+						<input type="password" class="form-control" placeholder=" Ingrese Contraseña" name="passwd"
+							id="passwd" autocomplete="off">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-lock"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="input-group mb-3">
+						<input type="password" class="form-control" placeholder="Confirme contraseña"
+							name="passwd2" id="passwd2">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-lock"></span>
+							</div>
+						</div>
+					</div>
+						 <div class="row">
+							<!-- /.col -->
+							<div class="col-12">
+								<button type="submit" class="btn btn-success  btn-block text-center ">
+									Registrar sesión
+									<i class="fas fa-sign-in-alt mr-2 mt-1"></i>
+								</button>
+								<a href="#" class="btn btn-primary btn-block text-center">
+									Registrar sesión con Google <i class="fab fa-google-plus mr-2"></i>
+								</a>
+							</div>
+			
+						</div>
+						<br>
+						<div class="mb-1">
+						<p >
+						<a th:href="@{/login}">Tengo un Usuario</a>
+						</p>
+						</div>
+				</form>
+
+
+
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
+
+			
+		</div>
+		<!-- /.login-box -->
+
+
+		<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+		<script th:src="@{/plugins/jquery-validation/jquery.validate.min.js}"></script>
+		<!-- Bootstrap 4 -->
+		<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+		<!-- AdminLTE App -->
+		<script th:src="@{/plugins/adminlte.min.js}"></script>
+		
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+		<script th:inline="javascript">
+			if ($(location).attr('href').match(/error.*/)) {
+				$('#alertFailedAuth').show();
+			}
+			if ($(location).attr('href').match(/noVerifed.*/)) {
+				$('#alertVerifed').show();
+			}
+			
+			
+//			let listAllRegister = /*[[${listAllRegister}]]*/
+	 	$(document).ready(() => {
+//		 	console.log(listAllRegister);
+		 })
+		 
+	var Fn = {
+		validaRut : function (rutCompleto) {
+		    // Despejar Puntos
+		    rutCompleto = rutCompleto.replaceAll('.','');
+		    // Despejar comas
+		    rutCompleto = rutCompleto.replaceAll(',','');
+		    // Despejar Guión
+			rutCompleto = rutCompleto.replace("‐","-");
+			if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test( rutCompleto ))
+				return false;
+			var tmp 	= rutCompleto.split('-');
+			var digv	= tmp[1]; 
+			var rut 	= tmp[0];
+			if ( digv == 'K' ) digv = 'k' ;
+		
+			return (Fn.dv(rut) == digv );
+		},
+		dv : function(T){
+			var M=0,S=1;
+			for(;T;T=Math.floor(T/10))
+				S=(S+T%10*(9-M++%6))%11;
+			return S?S-1:'k';
+		}	
+		
+	}
+	
+	
+	
+		 
+	$.validator.addMethod("valNacionalidad", (value, element) => {
+		let valid = (value == 0) ? false : true;
+ 	   return valid;
+ 	}, "Debe ingresar la nacionalidad");
+ 	
+ 	$.validator.addMethod("valGenero", (value, element) => {
+		let valid = (value == 0) ? false : true;
+ 	   return valid;
+ 	}, "Debe ingresar el genero");
+ 	
+ 	$.validator.addMethod("valComuna", (value, element) => {
+		let valid = (value == 0) ? false : true;
+ 	   return valid;
+ 	}, "Debe ingresar la comuna");
+ 	
+ 	$.validator.addMethod("valEstadoCivil", (value, element) => {
+		let valid = (value == 0) ? false : true;
+ 	   return valid;
+ 	}, "Debe ingresar el estado civil");
+ 	
+ 	$.validator.addMethod("valRut", function(value, element) {
+	   return Fn.validaRut(`${value}`);
+	}, "Debe ingresar un rut valido");
+	
+	$.validator.addMethod("lettersOnly", function(value, element) 
+	{
+	return this.optional(element) || /^[a-z ]+$/i.test(value);
+	}, "Debe ingresar letras");
+		 
+	$('#userAddForm').validate({
+	    rules: {
+	      rut:{
+			 required:true,
+	    	 valRut: { valRut : true }
+		  },
+		  name:{
+		  	required:true,
+		  	lettersOnly: { lettersOnly: true },
+		  	minlength: 3
+		  },
+		  lastName:{
+		  	required:true,
+		  	lettersOnly: { lettersOnly: true },
+		  	minlength: 3
+		  },
+		  contactPhone:{
+		  	required:true,
+		  	minlength: 9,
+		  	maxlength: 9,
+		  },
+		  address:{
+		  	required:true,
+		  	minlength: 3
+		  },
+		  birthday:{
+		  	required:true
+		  },
+		  idNacionalidad:{
+		  	valNacionalidad : { valNacionalidad:true }
+		  },
+		  idGenero:{
+		  	valGenero : { valGenero:true }
+		  },
+		  idComuna:{
+		  	valComuna : { valComuna:true }
+		  },
+		  idEstadoCivil:{
+		  	valEstadoCivil : { valEstadoCivil:true }
+		  },
+		  email:{
+		  	required:true,
+		  	email:true
+		  },
+		  corporateEmail:{
+		  	required:true,
+		  	email:true
+		  },
+		  passwd:{
+		  	required:true
+		  },
+		  passwd2:{
+		  	required:true
+		  }
+	    },
+	    messages: {
+	      rut: {
+	    	required: "Por favor ingrese un rut",
+	    	valRut: "El rut debe ser valido"
+	      },
+	      name: {
+	      	required: "Por favor ingrese su nombre",
+	      	minlength:"El nombre debe tener un minimo de 3 caracteres"
+	      },
+	      lastName: {
+	      	required: "Por favor ingrese su apellido",
+	      	minlength:"El apellido debe tener un minimo de 3 caracteres"
+	      },
+	      contactPhone: {
+	      	minlength: "Debe tener un minimo de 9 numeros",
+	      	maxlength:"Debe tener un maximo de 9 numeros"
+	      },
+	      address: {
+	      	required: "Por favor ingrese su direccion",
+	      	minlength:"La direccion debe tener un minimo de 3 caracteres"
+	      },
+	      birthday: {
+	      	required: "Por favor ingrese su cumpleaños"
+	      },
+	      email: {
+    		email: "El email debe tener este formato: abc@domain.tld"
+  		  },
+  		  corporateEmail: {
+    		email: "El email debe tener este formato: abc@domain.tld"
+  		  },
+  		  passwd: {
+  		  	required:"Debe ingresar una contraseña"
+  		  },
+  		  passwd2: {
+  		  	required:"Debe ingresar una contraseña"
+  		  }
+  		  
+	    },
+	    errorElement: 'span',
+	    errorPlacement: function (error, element) {
+	      error.addClass('invalid-feedback');
+	      element.closest('.form-group').append(error);
+	    },
+	    highlight: function (element, errorClass, validClass) {
+	      $(element).addClass('is-invalid');
+	    },
+	    unhighlight: function (element, errorClass, validClass) {
+	      $(element).removeClass('is-invalid');
+	    },
+	    submitHandler: function(form) {
+	    	let usuario = obtainUserForm($(form).serializeArray());
+	    	let idComunaCbx = $('#idComuna').val();
+	    	let idEstadoCivilCbx = $('#idEstadoCivil').val();
+	    	let idGeneroCbx = $('#idGenero').val();
+	    	let idNacionalidadCbx = $('#idNacionalidad').val();
+	    	let rutArray = usuario.rut.replaceAll('.','').split("-");
+	    	let birthdayStr = usuario.birthday;
+	    	usuario = 
+	    		{...usuario,
+	    			rut:rutArray[0],
+	    			dv:rutArray[1],
+	    			birthday:birthdayStr.split('-').reverse().join("-").replaceAll('-','/'),
+	    			comuna:
+	    				{ 
+	    					idComuna: idComunaCbx
+	    				},
+	    			estadoCivil:
+		    			{
+		    				idEstadoCivil:idEstadoCivilCbx
+		    			},
+		    		genero:
+		    			{
+		    				idGenero:idGeneroCbx
+		    			},
+		    		nacionalidad:
+		    			{
+		    				idNacionalidad:idNacionalidadCbx
+		    			},
+	    		}
+	    	delete usuario.idComuna;
+	    	delete usuario.idEstadoCivil;
+	    	delete usuario.idGenero;
+	    	delete usuario.idNacionalidad;
+	    	console.log(usuario);
+	    	createUser(usuario);
+	    }
+	    
+	  });
+	  
+	  const obtainUserForm = (usuarioArray) => {
+			let user = {};
+			for (field of usuarioArray) {
+				user[field.name] = (field.value.length == 0)?null:field.value;
+			}
+			return user;
+	  }
+	  
+	   const createUser = (user) => {
+	        $.ajax({
+	        	  url: `/ajax/createUser`,
+	            type: "POST",
+	            data: JSON.stringify(user),
+	            dataType: "json",
+	            async: false,
+	            contentType: "application/json; charset=utf-8",
+	            success: function(data) {            
+	           	 	if(data){
+	           	 		Swal.fire({
+						  position: 'top-end',
+						  icon: 'success',
+						  title: 'Usuario registrado con exito',
+						  showConfirmButton: false,
+						  timer: 1500
+						})
+	           	 	}else{
+	           	 	    Swal.fire({
+						  position: 'top-end',
+						  icon: 'error',
+						  title: 'Usuario  no se ha registado',
+						  showConfirmButton: false,
+						  timer: 1500
+						})
+	           	 	}
+	            }
+	    	});
+ 		}	
+		 
+		</script>
+</body>
+
+</html>

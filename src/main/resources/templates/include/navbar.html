@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+	<header class="site-header bg-success">
+        <div class="contenedor contenido-header">
+            <div class="barra">
+				<nav id="navegacion" class="navegacion">
+					<div th:if="${user == null}">
+						<a th:href="@{/login}">Iniciar Sesión</a>
+						<a th:href="@{/registerNewUser}">Regístrate</a>
+					</div>
+					<div th:if="${user != null}">
+						<span class="text-white h3" th:text="${user.name + ' ' + user.lastName}"></span>
+					</div>
+				</nav>
+                <div class="mobile-menu">
+                    <a href="#navegacion">
+                        <img src="https://i.ibb.co/SBDtKpV/logo-No-Mas.png" alt="">
+                    </a>
+                </div>
+
+                <nav id="navegacion" class="navegacion">
+                    <a th:href="@{/public-home}">No + Accidentes</a>
+                    <a th:href="@{/about-us}">Nosotros</a>
+					<a th:href="@{/service}">Servicios</a>
+					<a th:href="@{/contact}">Contacto</a>
+                    <a class="fa-solid fa-cart-shopping" th:href="@{/shopping-cart}" id="iconCarrito"></a>
+                    <a class="fa fa-sign-out fa-lg" th:if="${user != null}" th:href="@{/logout}"></a>
+                </nav>
+            </div>
+        </div>
+    </header>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>No + Accidentes | Recuperar contrasñea</title>
+  <link rel="icon" href="https://i.ibb.co/SBDtKpV/logo-No-Mas.png" type="image/x-icon">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link th:href="@{/plugins/fontawesome-free/css/all.min.css}" rel="stylesheet">
+  <!-- icheck bootstrap -->
+  <link th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}" rel="stylesheet">
+  <!-- Theme style -->
+  <link th:href="@{/plugins/adminlte.min.css}" rel="stylesheet">
+<!--   <!-- Theme custom style -->
+  <link th:href="@{/plugins/style.css}" rel="stylesheet">
+  <style type="text/css">
+  	.alertFailedAuth{
+  		display: none;
+  	}
+  </style>
+</head>
+<body class="hold-transition login-page body">
+<div class="login-box">
+	<div class="mb-2">
+  		<img style="width: 80%; height: 80%; line-height: 100%; outline: none; text-decoration: none; display: block; margin-left: auto; margin-right: auto" src="https://i.ibb.co/SBDtKpV/logo-No-Mas.png">
+  	</div>
+  <div class="card card-outline card-success">
+    <div class="card-header text-center">
+      <a href="../../index2.html" class="h1"><b>No + </b><br/> Accidentes</a>
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg">¿Has olvidado tu contraseña?, al ingresar tu email puedes recuperarla fácilmente</p>
+      <form id="form_reset" method="POST"><!-- /.th:action="@{/logincheck}"> -->
+        <input type="hidden" name="{$_csrf.parameterName}" value="${_csrf-token}">
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Email" name="txtEmail" id="txtEmail">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-12">
+            <button type="button" class="btn btn-success btn-block" id="btnSendReset">
+            	Enviar recuperación
+            </button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div> 
+<!-- /.login-box -->
+
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/plugins/adminlte.min.js}"></script>
+
+<script th:inline="javascript">
+	$(document).ready(() => {
+		console.log('prueba');
+	})
+	
+	$("#btnSendReset").click(() => {
+		 let txtEmail = $(`#txtEmail`).val();
+		 
+		 var validEmail =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+		 if(validEmail.test(txtEmail)){
+		 	sendResetPassword(txtEmail);		 
+		 }else{
+		 	alert('Mail no valido');
+		 }
+	 })
+	
+	const sendResetPassword = (txtEmail) => {
+		$.ajax ({
+			    url: `/ajax/sendReset/${txtEmail}`,
+			    type: "GET",
+			    data: "",
+			    dataType: "json",
+			    contentType: "application/json; charset=utf-8",
+			    success: function(data){
+					if(data){
+						alert('Si existe un usuario con este correo, se ha enviado el reseteo a la contraseña');
+					}
+			    }
+			});
+	}
+	
+</script>
+</body>
+</html>

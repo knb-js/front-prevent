@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> No + Accidentes || ShoppingCart</title>
+    <link rel="icon" href="https://i.ibb.co/SBDtKpV/logo-No-Mas.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Roboto:wght@500&display=swap"
+        rel="stylesheet">
+    <link th:href="@{/plugins/StylePrincipal.css}" rel="stylesheet">
+    <link th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-dark">
+
+    <div th:include="include/navbar"></div>
+
+    <div class="container mt-5">
+        <div class="row">
+        	<div class="col-12"  th:if="${user == null}">
+	        	<div class="alert alert-success" role="alert">
+	        		<h4 class="alert-heading">Cuidado!</h4>
+					 Recuerde que para comprar nuestros servicios debe estar registrado!
+				</div>
+        	</div>
+            <div class="col-8">
+                <table class="table table-dark">
+                    <thead>
+                        <!-- <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Handle</th>
+                        </tr> -->
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>
+                                <div class="container">
+                                	<div id="container_cart">
+                                	
+                                	</div>
+                                </div>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4">
+                <div class="card bg-success" style="width: 20rem;">
+                    <div class="card-body text-light">
+                        <h4 class="card-title" style="font-size: 18px;">Resumen de la compra</h5>
+                            <h5 class="card-subtitle mb-2 text-light" style="font-size: 16px;">Usted va a pagar esto:
+                                </h6>
+                                <p class="h5 card-text" style="font-size: 15px;">Total: <strong id="total_cart"></strong></p>
+                                <a id="btnPagar" class="card-link btn btn-outline-light  btn-block btn-lg" style="font-size: 15px;">Pagar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer-2 seccion bg-success" >
+        <div class="contenedor contenedor-footer">
+            <nav id="navegacion" class="navegacion">
+                <a th:href="@{/about-us}">Nosotros</a>
+				<a th:href="@{/service}">Servicios</a>
+				<a th:href="@{/contact}">Contacto</a>
+            </nav>
+            <p class="copyright">No + Accidentes 2022&copy;</p>
+        </div>
+    </footer>
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:inline="javascript">
+
+	let user = /*[[${user}]]*/;
+	
+	
+  	
+	let listCart = JSON.parse(localStorage.getItem('listCart')) || [];
+	 	$(document).ready(() => {
+		 	$('#iconCarrito').text(listCart.length);
+		 	console.log(user);
+		 })
+	const renderList = () => {
+		let listCart = JSON.parse(localStorage.getItem('listCart')) || [];
+		let service = document.getElementById('container_cart');
+		let divMain = '';
+		
+		let divServi = '';
+		for (let i = 0; i < listCart.length; i++) {
+		    const serv = listCart[i];
+		    divServi = divServi + `
+	        <div class="row">
+		        <div class="col-4">
+		            <img src="${serv.image}" width="320px" height="200px" alt="">
+		        </div>
+		        <div class="col-4 align-self-center">
+		            <span class="text-white" style="font-size: 17px;">${serv.nombreServicio}</span>
+		            <br>
+		            <p class="text-white" style="font-size: 10px;">${serv.descripcionLarga}</p>
+		        </div>
+		        <div class="col-4">
+		            <!-- <span class="align-self-center">$1000</span> -->
+		            <div class="d-flex align-items-end flex-column" style="height: 150px;">
+		                <div class="mt-5 display-5">${serv.precio}</div>
+		                <div class="mt-auto">
+		                    <button
+		                        class="btn btn-outline-danger align-self-end btn-lg" onclick="example(${serv.idServicio})">Eliminar</button>
+		                </div>
+		            </div>
+		        </div>
+	        </div>`;
+		}
+		divMain = `<div>${divServi}</div>`;
+		service.innerHTML = divMain;
+		$('#total_cart').text(listCart.reduce((n, {precio} ) => n + precio,0));
+		$('#iconCarrito').text(listCart.length);
+	}
+	
+	renderList();
+
+	$('#btnPagar').click(() => {
+		if(user === null){
+			$(location).attr('href',"/login");
+		}else{
+			$(location).attr('href',"/pay-service");
+		}
+	})
+	
+	const example = (id) => {
+		Swal.fire({
+		  title: 'Estás seguro de eliminar el servicio del carrito?',
+		  
+		  showCancelButton: true,
+		  confirmButtonText: 'Eliminar',
+		 
+		}).then((result) => {
+		  if (result.isConfirmed) {
+		    Swal.fire('Se ha borrado del carrito!', '', 'success')
+		    let listCart = JSON.parse(localStorage.getItem('listCart')) || [];
+			localStorage.setItem('listCart', JSON.stringify(listCart.filter( c => c.idServicio !== id)));
+			renderList();
+		  }
+		})	
+	}
+</script>
+</body>
+
+</html>

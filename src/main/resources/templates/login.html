@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>No + Accidentes | Login</title>
+  <link rel="icon" href="https://i.ibb.co/SBDtKpV/logo-No-Mas.png" type="image/x-icon">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link th:href="@{/plugins/fontawesome-free/css/all.min.css}" rel="stylesheet">
+  <!-- icheck bootstrap -->
+  <link th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}" rel="stylesheet">
+  <!-- Theme style -->
+  <link th:href="@{/plugins/adminlte.min.css}" rel="stylesheet">
+<!--   <!-- Theme custom style -->
+  <link th:href="@{/plugins/style.css}" rel="stylesheet">
+  <style type="text/css">
+  	.alertFailedAuth{
+  		display: none;
+  	}
+  </style>
+</head>
+<body class="hold-transition login-page body">
+<div class="login-box">
+	<div class="col-12">
+		<div class="alert alert-danger alert-dismissible mt-2 animation__shake alertFailedAuth" id="alertFailedAuth">
+	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	        <h5><i class="icon fas fa-ban"></i> No se ha logrado logear con éxito <i class="icon fas fa-user"></i></h5>
+	        Ha ocurrido un error con la autenticación, incorrecto usuario o contraseña.
+		</div>
+	</div>
+	<div class="col-12">
+		<div class="alert alert-danger alert-dismissible mt-2 animation__shake alertFailedAuth" id="alertVerifed">
+	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	        <h5><i class="icon fas fa-ban"></i> No se ha logrado logear con éxito <i class="icon fas fa-user"></i></h5>
+	        Debes verificar tu correo electronico, se acaba de enviar un email para que lo puedas realizar.
+		</div>
+	</div>
+	<div class="mb-2">
+  		<img style="width: 80%; height: 80%; line-height: 100%; outline: none; text-decoration: none; display: block; margin-left: auto; margin-right: auto" src="https://i.ibb.co/SBDtKpV/logo-No-Mas.png">
+  	</div>
+  <div class="card card-outline card-success">
+    <div class="card-header text-center">
+      <a th:href="@{public-home}" class="h1"><b>No + </b><br/> Accidentes</a>
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg">Inicia tu Sesión</p>
+      <form action="../../index3.html" id="form_login" method="POST" th:action="@{/logincheck}">
+        <input type="hidden" name="{$_csrf.parameterName}" value="${_csrf-token}">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Email" name="txtRut" id="txtRut" autocomplete="off">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Contraseña"  name="txtPasswd" id="txtPassword" autocomplete="off">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Recuerdame
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-12">
+            <button type="submit" class="btn btn-success btn-block">
+            	Iniciar sesión
+            	<i class="fas fa-sign-in-alt mr-2 mt-1"></i>
+            </button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+      <div class="social-auth-links text-center mt-2 mb-3">
+<!--         <a href="#" class="btn btn-block btn-primary"> -->
+<!--           <i class="fab fa-facebook mr-2"></i> Iniciar sesión con Facebook -->
+<!--         </a> -->
+        <a href="#" class="btn btn-block btn-primary">
+           Iniciar sesión con Google <i class="fab fa-google-plus mr-2"></i>
+        </a>
+      </div>
+      <!-- /.social-auth-links -->
+
+      <p class="mb-1">
+        <a th:href="@{/recovery-pass}">Olvide mi contraseña</a>
+      </p>
+      <p class="mb-0">
+        <a th:href="@{/registerNewUser}" class="text-center">Registrarse</a>
+      </p>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div> 
+<!-- /.login-box -->
+
+<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/plugins/adminlte.min.js}"></script>
+
+<script th:inline="javascript">
+ 	if($(location).attr('href').match(/error.*/)){
+		$('#alertFailedAuth').show();
+	}
+ 	if($(location).attr('href').match(/noVerifed.*/)){
+		$('#alertVerifed').show();
+	}
+</script>
+</body>
+</html>
